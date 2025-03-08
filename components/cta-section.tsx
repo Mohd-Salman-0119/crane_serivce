@@ -15,14 +15,34 @@ export function CTASection() {
     message: "",
   });
 
+  const [errors, setErrors] = useState({
+    name: "",
+    phone: "",
+    message: "",
+  });
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    setErrors({ ...errors, [e.target.name]: "" }); // Clear error when user starts typing
+  };
+
+  const validateForm = () => {
+    const newErrors = {
+      name: formData.name.trim() ? "" : "Name is required",
+      phone: formData.phone.trim() ? "" : "Phone is required",
+      message: formData.message.trim() ? "" : "Message is required",
+    };
+
+    setErrors(newErrors);
+    return Object.values(newErrors).every((error) => error === "");
   };
 
   const sendToWhatsApp = () => {
+    if (!validateForm()) return;
+
     const { name, phone, message } = formData;
-    const whatsappNumber = "7668264646"; // Replace with your WhatsApp number (without +)
-    
+    const whatsappNumber = "9638826667"; // Replace with your WhatsApp number (without +)
+
     const text = `Hello, my name is ${name}. My phone number is ${phone}. Message: ${message}`;
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
 
@@ -40,8 +60,7 @@ export function CTASection() {
           <DialogTrigger asChild>
             <Button size="lg" variant="secondary">Get in Touch</Button>
           </DialogTrigger>
-          <DialogContent className="max-w-md w-full mx-2 p-6 rounded-lg">
-            {/* Added DialogHeader and DialogTitle for accessibility */}
+          <DialogContent className="max-w-md w-full mx-2 p-6 m-auto rounded-lg">
             <DialogHeader>
               <DialogTitle>Contact Us</DialogTitle>
             </DialogHeader>
@@ -49,20 +68,28 @@ export function CTASection() {
             <div className="mb-4">
               <Label htmlFor="name">Name</Label>
               <Input id="name" name="name" value={formData.name} onChange={handleChange} required />
+              {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
             </div>
 
             <div className="mb-4">
               <Label htmlFor="phone">Phone</Label>
               <Input id="phone" name="phone" value={formData.phone} onChange={handleChange} required />
+              {errors.phone && <p className="text-red-500 text-sm">{errors.phone}</p>}
             </div>
 
             <div className="mb-4">
               <Label htmlFor="message">Message</Label>
               <Textarea id="message" name="message" value={formData.message} onChange={handleChange} required />
+              {errors.message && <p className="text-red-500 text-sm">{errors.message}</p>}
             </div>
 
-            <Button size="lg" className="w-full bg-green-500 hover:bg-green-700" onClick={sendToWhatsApp}>
-              <Send className="h-4 w-4 mr-1"/> Send to WhatsApp
+            <Button
+              size="lg"
+              className={`w-full ${Object.values(errors).some((err) => err) ? "bg-gray-400 cursor-not-allowed" : "bg-green-500 hover:bg-green-700"}`}
+              onClick={sendToWhatsApp}
+              disabled={Object.values(errors).some((err) => err)}
+            >
+              <Send className="h-4 w-4 mr-1" /> Send to WhatsApp
             </Button>
           </DialogContent>
         </Dialog>
