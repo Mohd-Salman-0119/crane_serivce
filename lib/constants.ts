@@ -109,22 +109,22 @@ export const COMPANY_DATA = {
       author: "Vikram Mehta",
       role: "Project Manager, MegaBuild Corp",
       rating: 5,
-      image: "https://www.shutterstock.com/image-photo/intelligent-indian-man-30-years-260nw-2487427965.jpg"
+      image: "/assets/vikram-mehta.jpg"
     },
     {
       text: "We've been working with Tiranga for years, and their commitment to safety and efficiency is unmatched. They're our go-to crane service provider.",
       author: "Anita Desai",
       role: "Site Supervisor, Skyline Developers",
       rating: 5,
-      image: "https://easy-peasy.ai/cdn-cgi/image/quality=70,format=auto,width=300/https://media.easy-peasy.ai/04a98af8-20b6-43e3-9057-68eee0bf3af0/b928f408-091c-4560-ab60-e34f79b6351a.png"
+      image: "/assets/anita-desai.png"
 
     },
     {
-      text: "The professionalism and skill of Tiranga's crane operators are truly impressive. They handled our complex lifting requirements with ease.",
+      text: "The professionalism and skill of Tiranga's crane operators are truly work exceptionally impressive and outstanding. They handled our complex lifting requirements with ease.",
       author: "Sanjay Gupta",
       role: "Chief Engineer, InfraTech Solutions",
       rating: 5,
-      image: "https://ai-previews.123rf.com/ai-txt2img/600nwm/6cb4d7d9-431e-4f99-9761-ff748834a42b.jpg"
+      image: "/assets/sanjay.jpg"
 
     },
   ],
